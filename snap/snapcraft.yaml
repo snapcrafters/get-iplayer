@@ -1,6 +1,6 @@
 name: get-iplayer
 version: 'latest'
-version-script: git -C parts/get-iplayer/src describe --tags
+version-script: git -C parts/get-iplayer/src describe --tags  | sed 's/v//'
 summary: CLI for downloading content from BBC iplayer
 description: |
     Command Line tool for downloading tv and radio programmes from the last 30 days from the BBC iPlayer.
@@ -38,10 +38,11 @@ parts:
         source: https://github.com/get-iplayer/get_iplayer.git
         override-build: |
           last_committed_tag="$(git describe --tags --abbrev=0)"
+          last_committed_tag_ver="$(echo ${last_committed_tag} | sed 's/v//')"
           last_released_tag="$(snap info get-iplayer | awk '$1 == "beta:" { print $2 }')"
           # If the latest tag from the upstream project has not been released to
           # beta, build that tag instead of master.
-          if [ "${last_committed_tag}" != "${last_released_tag}" ]; then
+          if [ "${last_committed_tag_ver}" != "${last_released_tag}" ]; then
             git fetch
             git checkout "${last_committed_tag}"
             cd ../src
