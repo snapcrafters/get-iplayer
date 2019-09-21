@@ -7,8 +7,8 @@ case "$SNAP_ARCH" in
     *64)
     ARCH="x86_64-linux-gnu"
     ;;
-    *)
-    ARCH="$SNAP_ARCH-linux-gnu"
+    armhf)
+    ARCH="arm-linux-gnueabihf"
     ;;
 esac
 
