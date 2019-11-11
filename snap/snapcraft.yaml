@@ -1,12 +1,17 @@
 name: get-iplayer
-version: 'latest'
-version-script: git -C parts/get-iplayer/src describe --tags  | sed 's/v//'
+adopt-info: get-iplayer
 summary: CLI for downloading content from BBC iplayer
 description: |
     Command Line tool for downloading tv and radio programmes from the last 30 days from the BBC iPlayer.
-
+base: core
 grade: stable 
 confinement: strict
+
+plugs:
+  config-options:
+    interface: system-files
+    read:
+      - /etc/get_iplayer/options
 
 apps:
   get-iplayer:
@@ -15,6 +20,7 @@ apps:
       - network
       - removable-media
       - home
+      - config-options
   get-iplayer-cgi:
     command: launcher $SNAP/get_iplayer.cgi --getiplayer $SNAP/get_iplayer --ffmpeg $SNAP/usr/bin/ffmpeg --port 1935
     plugs:
@@ -22,6 +28,7 @@ apps:
       - network-bind
       - removable-media
       - home
+      - config-options
 
 parts:
     remove-symlink:
@@ -48,7 +55,9 @@ parts:
             cd ../src
             git checkout "${last_committed_tag}"
           fi
+          echo "SNAP_ARCH:" $SNAP_ARCH
           snapcraftctl build
+          snapcraftctl set-version $(git -C ../src describe --tags  | sed 's/v//')
         plugin: dump
         stage-packages:
         - perl-base
