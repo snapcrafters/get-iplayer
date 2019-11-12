@@ -8,7 +8,7 @@ grade: stable
 confinement: strict
 
 plugs:
-  config-options:
+  etc-get-iplayer-options:
     interface: system-files
     read:
       - /etc/get_iplayer/options
@@ -20,7 +20,7 @@ apps:
       - network
       - removable-media
       - home
-      - config-options
+      - etc-get-iplayer-options
   get-iplayer-cgi:
     command: launcher $SNAP/get_iplayer.cgi --getiplayer $SNAP/get_iplayer --ffmpeg $SNAP/usr/bin/ffmpeg --port 1935
     plugs:
@@ -28,7 +28,7 @@ apps:
       - network-bind
       - removable-media
       - home
-      - config-options
+      - etc-get-iplayer-options
 
 parts:
     remove-symlink:
