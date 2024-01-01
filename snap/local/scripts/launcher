@@ -1,0 +1,16 @@
+#!/bin/bash
+
+case "$SNAP_ARCH" in
+    amd64) ARCH="x86_64-linux-gnu" ;;
+    s390x) ARCH="s390x-linux-gnu" ;;
+    ppc64el) ARCH="powerpc64le-linux-gnu" ;;
+    armhf) ARCH="arm-linux-gnueabihf" ;;
+    arm64) ARCH="aarch64-linux-gnu" ;;
+esac
+
+export LC_ALL="C.UTF-8"
+export PERL5LIB="$SNAP/usr/lib/$ARCH/perl-base/:$SNAP/usr/lib/$ARCH/perl5/5.34/:$SNAP/usr/share/perl5/:$SNAP/usr/share/perl/5.34/:$SNAP/usr/share/perl/5.34.0/:$SNAP/usr/lib/$ARCH/perl/5.34/"
+export LD_LIBRARY_PATH="$SNAP/usr/lib/$ARCH/blas/:$SNAP/usr/lib/$ARCH/lapack/:$SNAP/usr/lib/$ARCH/pulseaudio/:$LD_LIBRARY_PATH"
+export HOME="$SNAP_USER_COMMON"
+
+exec "$@"
