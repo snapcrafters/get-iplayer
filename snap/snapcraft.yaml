@@ -3,7 +3,7 @@ adopt-info: get-iplayer
 summary: CLI for downloading content from BBC iplayer
 description: |
     Command Line tool for downloading tv and radio programmes from the last 30 days from the BBC iPlayer.
-version: 3.35
+version: "3.35"
 base: core22
 grade: stable 
 confinement: strict
