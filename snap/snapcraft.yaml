@@ -3,11 +3,18 @@ adopt-info: get-iplayer
 summary: CLI for downloading content from BBC iplayer
 description: |
     Command Line tool for downloading tv and radio programmes from the last 30 days from the BBC iPlayer.
+version: "3.35"
 base: core22
 grade: stable 
 confinement: strict
 assumes:
   - command-chain
+architectures:
+  - amd64
+  - arm64
+  - armhf
+  - ppc64el
+  - s390x
 
 # plugs:
 #   etc-get-iplayer-options:
@@ -51,21 +58,7 @@ parts:
         source: snap/local/scripts
     get-iplayer:
         source: https://github.com/get-iplayer/get_iplayer.git
-        override-build: |
-          last_committed_tag="$(git describe --tags --abbrev=0)"
-          last_committed_tag_ver="$(echo ${last_committed_tag} | sed 's/v//')"
-          last_released_tag="$(snap info get-iplayer | awk '$1 == "latest/beta:" { print $2 }')"
-          # If the latest tag from the upstream project has not been released to
-          # beta, build that tag instead of master.
-          if [ "${last_committed_tag_ver}" != "${last_released_tag}" ]; then
-            git fetch
-            git checkout "${last_committed_tag}"
-            cd ../src
-            git checkout "${last_committed_tag}"
-          fi
-          echo "SNAP_ARCH:" $SNAP_ARCH
-          snapcraftctl build
-          snapcraftctl set-version $(git -C ../src describe --tags  | sed 's/v//')
+        source-tag: "v${SNAPCRAFT_PROJECT_VERSION}"
         plugin: dump
         stage-packages:
         - perl-base
