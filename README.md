@@ -39,7 +39,7 @@ If this is your first time contributing to this snap, you first need to set up y
 
    ```shell
    git remote rename origin myfork
-   git remote add snapcrafters https://github.com/snapcrafters/signal-desktop.git
+   git remote add snapcrafters https://github.com/snapcrafters/get-iplayer.git
    git fetch --all
    ```
 
@@ -75,7 +75,7 @@ Now that your git metadata has been updated you are ready to create a bugfix bra
 4. Then, [open up a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) from your `my-bugfix-branch` to the `snapcrafters/candidate` branch.
 5. Once you've opened the pull request, it will automatically trigger the build-test action that will launch a build of the snap. You can watch the progress of the snap build from your pull request (Show all checks -> Details). Once the snap build has completed, you can find the built snap (to test with) under "Artifacts".
 6. Someone from the team will review the open pull request and either merge it or start a discussion with you with additional changes or clarification needed.
-7. Once the pull request has been merged into the stable branch, a GitHub action will rebuild the snap using your changes and publish it to the [Snap Store](https://snapcraft.io/signal-desktop) into the `candidate` channel. After sufficient testing of the snap from the candidate channel, one of the maintainers or administrators will promote the snap to the stable branch in the Snap Store.
+7. Once the pull request has been merged into the stable branch, a GitHub action will rebuild the snap using your changes and publish it to the [Snap Store](https://snapcraft.io/get-iplayer) into the `candidate` channel. After sufficient testing of the snap from the candidate channel, one of the maintainers or administrators will promote the snap to the stable branch in the Snap Store.
 
 ## Maintainers
 
