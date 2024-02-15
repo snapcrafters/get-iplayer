@@ -12,6 +12,9 @@ assumes:
 architectures:
   - amd64
   - arm64
+  - armhf
+  - ppc64el
+  - s390x
 
 # plugs:
 #   etc-get-iplayer-options:
