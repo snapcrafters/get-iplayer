@@ -7,8 +7,7 @@ version: "3.36"
 base: core22
 grade: stable 
 confinement: strict
-assumes:
-  - command-chain
+
 architectures:
   - amd64
   - arm64
