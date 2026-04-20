@@ -1,6 +1,9 @@
 name: Pull Request
 
 on:
+  push:
+    branches:
+      - "**"
   pull_request:
     branches: [ "**" ]
 
@@ -10,8 +13,17 @@ concurrency:
 
 jobs:
   build:
-    name: 🧪 Build snap on amd64
+    name: 🧪 Build and smoke test snap on amd64
     runs-on: ubuntu-latest
     steps:
       - name: 🧪 Build snap on amd64
         uses: snapcrafters/ci/test-snap-build@main
+
+      - name: 📥 Install built snap
+        run: sudo snap install --dangerous ./*.snap
+
+      - name: 🔎 Smoke test get-iplayer
+        run: |
+          expected_version="$(sed -n 's/^version: "\(.*\)"/\1/p' snap/snapcraft.yaml)"
+          snap run get-iplayer.get-iplayer --version | tee version.txt
+          grep -F "$expected_version" version.txt
