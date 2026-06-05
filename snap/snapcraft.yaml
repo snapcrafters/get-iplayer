@@ -72,5 +72,5 @@ parts:
         - libdb5.3
         - libpulse0
         - libslang2
-        - freeglut3
+        - libglut3.12
         - libglu1-mesa
