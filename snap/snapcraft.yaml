@@ -69,7 +69,7 @@ parts:
         - libcgi-pm-perl
         - atomicparsley
         - ffmpeg
-        - libdb5.3
+        - libdb5.3t64
         - libpulse0
         - libslang2
         - libglut3.12
