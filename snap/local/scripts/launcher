@@ -9,7 +9,22 @@ case "$SNAP_ARCH" in
 esac
 
 export LC_ALL="C.UTF-8"
-export PERL5LIB="$SNAP/usr/lib/$ARCH/perl-base/:$SNAP/usr/lib/$ARCH/perl5/5.34/:$SNAP/usr/share/perl5/:$SNAP/usr/share/perl/5.34/:$SNAP/usr/share/perl/5.34.0/:$SNAP/usr/lib/$ARCH/perl/5.34/"
+
+PERL5LIB_PATHS=(
+    "$SNAP/usr/lib/$ARCH/perl-base"
+    "$SNAP/usr/lib/$ARCH/perl5"/[0-9]*
+    "$SNAP/usr/share/perl5"
+    "$SNAP/usr/share/perl"/[0-9]*
+    "$SNAP/usr/lib/$ARCH/perl"/[0-9]*
+)
+PERL5LIB=""
+for path in "${PERL5LIB_PATHS[@]}"; do
+    if [ -d "$path" ]; then
+        PERL5LIB="${PERL5LIB:+$PERL5LIB:}$path"
+    fi
+done
+export PERL5LIB
+
 export LD_LIBRARY_PATH="$SNAP/usr/lib/$ARCH/blas/:$SNAP/usr/lib/$ARCH/lapack/:$SNAP/usr/lib/$ARCH/pulseaudio/:$LD_LIBRARY_PATH"
 export HOME="$SNAP_USER_COMMON"
 
